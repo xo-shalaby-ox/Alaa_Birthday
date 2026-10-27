@@ -1,0 +1,15 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: microphone=(self), camera=(), geolocation=()
+  X-Robots-Tag: noindex
+
+# Vite output: file names contain a content hash, so they can be cached forever
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Your media keeps its name when replaced, so cache briefly
+/photos/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/music/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400

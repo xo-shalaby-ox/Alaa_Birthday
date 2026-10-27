@@ -1,0 +1,78 @@
+/* ── 4 · Flip cards ────────────────────────────────────── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(12px, 2.4vw, 22px);
+  perspective: 1200px;
+}
+@media (min-width: 760px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.flip {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+}
+.flip__in {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.8s var(--spring);
+}
+.flip.on .flip__in {
+  transform: rotateY(180deg);
+}
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+  padding: 16px;
+  border-radius: 22px;
+  text-align: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 12px 28px -14px rgba(168, 40, 90, 0.4);
+}
+.face--front {
+  background: linear-gradient(150deg, #ffd3e1, #ffb3c9 45%, #e7c8ff);
+  color: var(--berry);
+}
+.face--front::after {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 16px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.85);
+}
+.face--front em {
+  font-size: clamp(2.2rem, 7vw, 3rem);
+  font-style: normal;
+  animation: float 3.5s ease-in-out infinite;
+}
+.face--front b {
+  font: italic 400 clamp(1.1rem, 3vw, 1.3rem) var(--serif);
+}
+.face--front small {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.face--back {
+  background: #fff;
+  transform: rotateY(180deg);
+  font: italic 400 clamp(1rem, 2.6vw, 1.22rem)/1.45 var(--serif);
+  border: 2px solid var(--blush);
+  text-wrap: balance;
+}
+.face--back::before {
+  content: '♥';
+  color: var(--rose);
+  font-style: normal;
+}

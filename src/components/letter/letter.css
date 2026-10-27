@@ -1,0 +1,166 @@
+/* ── 6 · Letter ────────────────────────────────────────── */
+.envelope {
+  --w: clamp(260px, 80vw, 380px);
+  position: relative;
+  display: block;
+  width: var(--w);
+  aspect-ratio: 3 / 2;
+  margin: calc(var(--w) * 0.35) auto 0;
+  transition:
+    transform 0.5s var(--spring),
+    opacity 0.6s;
+}
+.envelope:hover {
+  transform: translateY(-4px) rotate(-1deg);
+}
+.env__back,
+.env__front,
+.env__flap {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+}
+.env__back {
+  background: linear-gradient(160deg, #ff9dbb, #f2648f);
+  box-shadow: var(--shadow);
+}
+.env__paper {
+  position: absolute;
+  inset: 8% 7% 6%;
+  z-index: 1;
+  padding-top: 7%;
+  border-radius: 8px;
+  background: #fffdfb;
+  color: var(--deep);
+  font-size: clamp(1.8rem, 6.5vw, 2.4rem);
+  transition: transform 0.9s var(--ease) 0.35s;
+}
+.env__front {
+  z-index: 2;
+  background: linear-gradient(170deg, #ffb7cc, #ff8fb1);
+  clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+}
+.env__flap {
+  z-index: 3;
+  background: linear-gradient(#ffc6d6, #ff9dbb);
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: top;
+  transition:
+    transform 0.8s var(--ease),
+    z-index 0s 0.4s;
+}
+.env__seal {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 52%;
+  font-size: clamp(2rem, 7vw, 2.6rem);
+  translate: -50% -50%;
+  animation: beat 1.6s ease-in-out infinite;
+  transition: opacity 0.3s;
+}
+.envelope.open {
+  pointer-events: none;
+}
+.envelope.open .env__seal {
+  opacity: 0;
+}
+.envelope.open .env__flap {
+  transform: rotateX(180deg);
+  z-index: 0;
+}
+.envelope.open .env__paper {
+  transform: translateY(-55%);
+}
+.envelope.gone {
+  opacity: 0;
+  transform: scale(0.85);
+}
+.paper {
+  max-width: 680px;
+  padding: clamp(28px, 6vw, 56px) clamp(22px, 6vw, 60px);
+  border-radius: 6px 6px 22px 22px;
+  animation: pop 1s var(--ease) both;
+  background:
+    repeating-linear-gradient(
+      transparent 0 calc(1.9em - 1px),
+      rgba(198, 164, 242, 0.2) calc(1.9em - 1px) 1.9em
+    ),
+    #fffdfb;
+  box-shadow: 0 30px 60px -30px rgba(75, 34, 56, 0.45);
+  font: 350 clamp(1.05rem, 2.5vw, 1.22rem)/1.9 var(--serif);
+}
+.paper p {
+  margin: 0 0 1em;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) forwards calc(var(--i) * 0.35s + 0.4s);
+}
+.paper p:first-child {
+  font: 400 2.2em/1.2 var(--script);
+  color: var(--deep);
+}
+.paper .paper__sign {
+  opacity: 0;
+  animation: rise 0.9s var(--ease) forwards var(--sign-delay, 2.5s);
+  margin: 0.6em 0 0;
+  text-align: right;
+  color: var(--deep);
+  font-size: clamp(2.1rem, 6.5vw, 2.7rem);
+  line-height: 1.15;
+}
+
+/* ── Night: the page drifts from pastel day into a velvet, candlelit evening ── */
+.section--night {
+  position: relative;
+  isolation: isolate;
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(110, 40, 85, 0.55) 9%,
+    #4a1838 22%,
+    #2b0d22 55%,
+    #2b0d22
+  );
+}
+.section--night::before {
+  /* candle glow */
+  content: '';
+  position: absolute;
+  inset: 20% 0 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(50% 40% at 50% 45%, rgba(242, 191, 99, 0.18), transparent 70%);
+}
+.section--night .title {
+  color: #fff4f8;
+}
+.section--night .title em {
+  color: var(--pink);
+  text-shadow: 0 0 24px rgba(255, 127, 166, 0.55);
+}
+.section--night .sub {
+  color: rgba(255, 228, 238, 0.72);
+}
+.section--night .env__back {
+  box-shadow:
+    0 30px 80px -20px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(255, 127, 166, 0.25);
+}
+.section--night .paper {
+  color: var(--ink);
+  box-shadow:
+    0 40px 90px -30px rgba(0, 0, 0, 0.7),
+    0 0 90px rgba(242, 191, 99, 0.16);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

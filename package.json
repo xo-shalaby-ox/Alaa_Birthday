@@ -1,0 +1,19 @@
+{
+  "name": "alaa-birthday",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A birthday website for Alaa. Vanilla JS + CSS, bundled with Vite.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "deploy": "npm run build && npx --yes wrangler pages deploy dist --project-name alaa-birthday"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "vite": "^8.3.5"
+  }
+}

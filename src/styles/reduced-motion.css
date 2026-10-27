@@ -1,0 +1,21 @@
+/* Calmer experience for people who ask their OS for less motion. Imported last so it wins. */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal,
+  .paper p,
+  .paper .paper__sign {
+    opacity: 1;
+    transform: none;
+    animation-delay: 0s !important;
+  }
+}
